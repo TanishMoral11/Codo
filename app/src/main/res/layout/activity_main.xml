@@ -8,6 +8,7 @@
     tools:context=".MainActivity">
 
     <EditText
+        android:id="@+id/et_handle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Enter Your Handle"
@@ -17,6 +18,7 @@
         tools:layout_editor_absoluteY="26dp" />
 
     <Button
+        android:id="@+id/btn_find"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Find"
@@ -26,6 +28,7 @@
         tools:layout_editor_absoluteY="26dp" />
 
     <TextView
+        android:id="@+id/tv_rating"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
