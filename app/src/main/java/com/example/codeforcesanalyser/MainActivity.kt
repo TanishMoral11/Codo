@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity() {
                     Log.e(TAG, "API call failed: ${response.code()}, Error body: $errorBody")
                     Toast.makeText(this@MainActivity, "Error: ${response.code()} - ${response.message()}", Toast.LENGTH_LONG).show()
                 }
+
             }
 
             override fun onFailure(call: Call<responseDataClass?>, t: Throwable) {
