@@ -4,8 +4,10 @@ import android.app.ProgressDialog
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.codeforcesanalyser.databinding.ActivityMainBinding
+import responseDataClass
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+//        enableEdgeToEdge()
         binding.btnFind.setOnClickListener {
             val handle = binding.etHandle.text.toString()
             if (handle.isNotEmpty()) {
@@ -48,8 +50,13 @@ class MainActivity : AppCompatActivity() {
                     val result = response.body()?.result
                     if (!result.isNullOrEmpty()) {
                         val latestRating = result.last().newRating
+                        val rank  = result.last().rank
                         Log.d(TAG, "Latest rating: $latestRating")
+                        binding.tvHandle.text = "Handle : ${result.last().handle}"
                         binding.tvRating.text = "Current Rating: $latestRating"
+                        binding.tvRank.text = "Rank  : $rank"
+                        binding.tvLastContest.text = "Last Contest : ${result.last().contestName}"
+                        binding.tvRatingChange.text  = "Rating Change : ${result.last().newRating - result.last().oldRating}"
                     } else {
                         Log.d(TAG, "No rating data available")
                         binding.tvRating.text = "No rating data available"
