@@ -1,7 +1,10 @@
 package com.example.codeforcesanalyser
 
 import android.app.ProgressDialog
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -30,8 +33,18 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please enter a Codeforces handle", Toast.LENGTH_SHORT).show()
             }
         }
+
+        binding.tvDeveloperInfo.text = Html.fromHtml("Developed with ❤️ by <b>Tanish Moral</b>", Html.FROM_HTML_MODE_LEGACY)
+        binding.tvDeveloperInfo.setOnClickListener {
+            openLinkedInProfile()
+        }
     }
 
+    private fun openLinkedInProfile() {
+        val linkedInUrl = "https://www.linkedin.com/in/tanishmoral/"
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(linkedInUrl))
+        startActivity(intent)
+    }
     private fun getData(handle: String) {
         val progressDialog = ProgressDialog(this)
         progressDialog.setMessage("Please wait...")
