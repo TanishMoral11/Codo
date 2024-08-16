@@ -1,4 +1,4 @@
-package com.example.codeforcesanalyzer
+package com.example.codeforcesanalyser
 
 import android.app.ProgressDialog
 import android.content.Intent
@@ -9,9 +9,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.example.codeforcesanalyser.R
-import com.example.codeforcesanalyser.RetrofitInstance
 import com.example.codeforcesanalyser.databinding.ActivityMainBinding
+import com.example.codeforcesanalyzer.UserInfoResponse
+import com.example.codeforcesanalyzer.responseDataClass
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
