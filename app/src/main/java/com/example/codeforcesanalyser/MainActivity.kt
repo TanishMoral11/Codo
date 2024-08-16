@@ -4,7 +4,10 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
 import android.text.Html
+import android.text.style.StyleSpan
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -27,12 +30,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         // Find the TextView by its ID
         val developerInfo: TextView = findViewById(R.id.tvDeveloperInfo)
 
         // Set the HTML formatted text
-        developerInfo.text = Html.fromHtml("Developed with ❤️ by <b>Tanish Moral</b>")
-
+        developerInfo.text = Html.fromHtml("Developed with ❤️ by <b>Tanish Moral</b>", Html.FROM_HTML_MODE_LEGACY)
 
         binding.btnFind.setOnClickListener {
             val handle = binding.etHandle.text.toString()
@@ -43,7 +46,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        binding.tvDeveloperInfo.text = Html.fromHtml("Developed with ❤️ by <b>Tanish Moral</b>", Html.FROM_HTML_MODE_LEGACY)
         binding.tvDeveloperInfo.setOnClickListener {
             openLinkedInProfile()
         }
@@ -69,19 +71,23 @@ class MainActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val userInfo = response.body()?.result?.firstOrNull()
                     if (userInfo != null) {
-                        // Set User Info
-                        binding.tvHandle.text = "Handle: ${userInfo.handle}"
-                        binding.tvEmail.text = "Email: ${userInfo.email ?: "N/A"}"
-                        binding.tvRank.text = "Rank: ${userInfo.rank}"
-                        binding.tvRating.text = "Rating: ${userInfo.rating}"
-                        binding.tvMaxRank.text = "Max Rank: ${userInfo.maxRank}"
-                        binding.tvMaxRating.text = "Max Rating: ${userInfo.maxRating}"
-                        binding.tvFriendCount.text = "Friends: ${userInfo.friendOfCount}"
+                        // Set User Info with formatted text
+                        setTextWithBoldLabel(binding.tvHandle, "Handle:", userInfo.handle)
+                        setTextWithBoldLabel(binding.tvEmail, "Email:", userInfo.email ?: "N/A")
+                        setTextWithBoldLabel(binding.tvRank, "Rank:", userInfo.rank)
+                        setTextWithBoldLabel(binding.tvRating, "Rating:",
+                            userInfo.rating.toString()
+                        )
+                        setTextWithBoldLabel(binding.tvMaxRank, "Max Rank:", userInfo.maxRank)
+                        setTextWithBoldLabel(binding.tvMaxRating, "Max Rating:",
+                            userInfo.maxRating.toString()
+                        )
+                        setTextWithBoldLabel(binding.tvFriendCount, "Friends:", userInfo.friendOfCount.toString())
 
                         // Convert Unix Time to Date
                         val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
-                        binding.tvLastOnline.text = "Last Online: ${sdf.format(Date(userInfo.lastOnlineTimeSeconds * 1000))}"
-                        binding.tvRegistrationTime.text = "Registered On: ${sdf.format(Date(userInfo.registrationTimeSeconds * 1000))}"
+                        setTextWithBoldLabel(binding.tvLastOnline, "Last Online:", sdf.format(Date(userInfo.lastOnlineTimeSeconds * 1000)))
+                        setTextWithBoldLabel(binding.tvRegistrationTime, "Registered On:", sdf.format(Date(userInfo.registrationTimeSeconds * 1000)))
 
                         // Load Avatar
                         Glide.with(this@MainActivity)
@@ -120,11 +126,12 @@ class MainActivity : AppCompatActivity() {
                         val lastContest = result.last().contestName
                         val ratingChange = result.last().newRating - result.last().oldRating
 
-                        binding.tvLastContest.text = "Last Contest: $lastContest"
-                        binding.tvRatingChange.text = "Rating Change: $ratingChange"
-                    } else {
-                        binding.tvLastContest.text = "No contest data available"
-                        binding.tvRatingChange.text = "N/A"
+                        setTextWithBoldLabel(binding.tvLastContest, "Last Contest:", lastContest)
+                        setTextWithBoldLabel(binding.tvRatingChange, "Rating Change:", ratingChange.toString())
+                    }
+                    else {
+                        setTextWithBoldLabel(binding.tvLastContest, "Last Contest:", "No contest data available")
+                        setTextWithBoldLabel(binding.tvRatingChange, "Rating Change:", "N/A")
                     }
                 }
             }
@@ -133,5 +140,11 @@ class MainActivity : AppCompatActivity() {
                 // Handle error
             }
         })
+    }
+
+    private fun setTextWithBoldLabel(textView: TextView, label: String, value: String) {
+        val spannable = SpannableString("$label $value")
+        spannable.setSpan(StyleSpan(android.graphics.Typeface.BOLD), 0, label.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        textView.text = spannable
     }
 }
