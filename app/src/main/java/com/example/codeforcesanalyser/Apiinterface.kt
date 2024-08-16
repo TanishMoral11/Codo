@@ -1,11 +1,14 @@
-package com.example.codeforcesanalyser
+package com.example.codeforcesanalyzer
 
-import responseDataClass
+
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface Apiinterface {
+interface ApiInterface {
     @GET("user.rating")
-    fun getData(@Query("handle") handle: String): Call<responseDataClass>
+    fun getRatingData(@Query("handle") handle: String): Call<responseDataClass>
+
+    @GET("user.info")
+    fun getUserInfo(@Query("handles") handle: String): Call<UserInfoResponse>
 }

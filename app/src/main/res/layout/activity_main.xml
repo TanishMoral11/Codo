@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -44,6 +45,7 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+            <!-- Display User Handle -->
             <TextView
                 android:id="@+id/tvHandle"
                 android:layout_width="wrap_content"
@@ -51,43 +53,105 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
+            <!-- Display Email -->
             <TextView
-                android:id="@+id/tvRating"
+                android:id="@+id/tvEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"/>
 
-            <TextView
-                android:id="@+id/tvRatingChange"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textSize="16sp" />
-
+            <!-- Display Rank -->
             <TextView
                 android:id="@+id/tvRank"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"/>
 
+            <!-- Display Rating -->
+            <TextView
+                android:id="@+id/tvRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"/>
+
+            <!-- Display Max Rank -->
+            <TextView
+                android:id="@+id/tvMaxRank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"/>
+
+            <!-- Display Max Rating -->
+            <TextView
+                android:id="@+id/tvMaxRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"/>
+
+            <!-- Display Last Online Time -->
+            <TextView
+                android:id="@+id/tvLastOnline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"/>
+
+            <!-- Display Registration Time -->
+            <TextView
+                android:id="@+id/tvRegistrationTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"/>
+
+            <!-- Display Friend Count -->
+            <TextView
+                android:id="@+id/tvFriendCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"/>
+
+            <!-- Display Last Contest -->
             <TextView
                 android:id="@+id/tvLastContest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"/>
 
+            <!-- Display Rating Change from Last Contest -->
+            <TextView
+                android:id="@+id/tvRatingChange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"/>
 
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
+
+    <!-- ImageView for User's Avatar -->
+    <ImageView
+        android:id="@+id/ivAvatar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnFind"
+        android:scaleType="centerCrop"/>
+
     <TextView
         android:id="@+id/tvDeveloperInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Developed with ❤️ by &lt;b>Tanish Moral&lt;/b>"
         android:textSize="14sp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
